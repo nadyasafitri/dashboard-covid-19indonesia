@@ -222,7 +222,7 @@ def main():
       st.plotly_chart(fig33)
   
   st.sidebar.subheader('Analysis through Bubble Chart')
- select = st.sidebar.selectbox('Choose Bubble Chart',['Confirmed Cases','Recovered Cases','Active Cases','Deaths Cases'],key='2')
+  select = st.sidebar.selectbox('Choose Bubble Chart',['Confirmed Cases','Recovered Cases','Active Cases','Deaths Cases'],key='2')
   if not st.sidebar.checkbox("Hide Bubble Chart",True):
     Top10kasus_terkonfirmasi['Recovered_Rate'] = Top10kasus_terkonfirmasi['Total_Sembuh'] / Top10kasus_terkonfirmasi['Total_Terkonfirmasi']
     Top10kasus_terkonfirmasi['Death_Rate'] = Top10kasus_terkonfirmasi['Total_MeninggalDunia'] / Top10kasus_terkonfirmasi['Total_Terkonfirmasi']
