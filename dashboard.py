@@ -300,7 +300,7 @@ def main():
   
   st.sidebar.subheader('Comparision of infection growth with Analysis through Line Chart')
   select = st.sidebar.selectbox('Choose Line Chart',['Confirmed Cases','Recovered Cases','Active Cases','Deaths Cases'],key='2')
-  if not st.sidebar.checkbox("Hide Scatter Plots",True):
+  if not st.sidebar.checkbox("Hide Line Chart",True):
     if select == "Confirmed Cases": 
       total_cases_graph  =alt.Chart(subset_data).transform_filter(
         alt.datum.total_cases > 0  
