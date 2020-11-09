@@ -222,7 +222,7 @@ def main():
       st.plotly_chart(fig33)
   
   st.sidebar.subheader('Analysis through Bubble Chart')
-  select = st.sidebar.selectbox('Choose Bubble Chart',['Confirmed Cases','Recovered Cases','Active Cases','Deaths Cases'],key='2')
+  select = st.sidebar.selectbox('Recovered_Rate and Death_Rate')
   if not st.sidebar.checkbox("Hide Bubble Chart",True):
     Top10kasus_terkonfirmasi['Recovered_Rate'] = Top10kasus_terkonfirmasi['Total_Sembuh'] / Top10kasus_terkonfirmasi['Total_Terkonfirmasi']
     Top10kasus_terkonfirmasi['Death_Rate'] = Top10kasus_terkonfirmasi['Total_MeninggalDunia'] / Top10kasus_terkonfirmasi['Total_Terkonfirmasi']
@@ -266,7 +266,7 @@ def main():
     else:
       fig43 = px.treemap(Top10kasus_meninggaldunia.sort_values(by='Total_MeninggalDunia', ascending=False).reset_index(drop=True), 
                  path=["state"], values="Total_MeninggalDunia", height=700,
-                 title='Top 10 Provinces of Indonesia on Active Case',
+                 title='Top 10 Provinces of Indonesia on Death Case',
                  color_discrete_sequence = px.colors.qualitative.Prism)
       fig43.data[0].textinfo = 'label+text+value'
       fig43.update_layout(margin=dict(t=80,l=0,r=0,b=0)) 
@@ -302,8 +302,8 @@ def main():
   select = st.sidebar.selectbox('Choose Line Chart',['Confirmed Cases','Recovered Cases','Active Cases','Deaths Cases'],key='2')
   if not st.sidebar.checkbox("Hide Line Chart",True):
     if select == "Confirmed Cases": 
-      total_cases_graph  =alt.Chart(subset_data).transform_filter(
-        alt.datum.total_cases > 0  
+      total_cases_graph=alt.Chart(subset_data).transform_filter(
+        alt.datum.Total_Terkonfirmasi > 0  
       ).mark_line().encode(
         x=alt.X('date', type='nominal', title='Date'),
         y=alt.Y('sum(Total_Terkonfirmasi):Q',  title='Confirmed cases'),
@@ -320,7 +320,7 @@ def main():
 
     elif select == "Recovered Cases":
       total_cases_graph1  =alt.Chart(subset_data).transform_filter(
-        alt.datum.total_cases > 0  
+        alt.datum.Total_Sembuh > 0  
       ).mark_line().encode(
         x=alt.X('date', type='nominal', title='Date'),
         y=alt.Y('sum(Total_Sembuh):Q',  title='Recovered cases'),
@@ -334,27 +334,10 @@ def main():
         titleFontSize=20
       )
       st.altair_chart(total_cases_graph1)
-
-    elif select == "Recovered Cases":
-      total_cases_graph2  =alt.Chart(subset_data).transform_filter(
-        alt.datum.total_cases > 0  
-      ).mark_line().encode(
-        x=alt.X('date', type='nominal', title='Date'),
-        y=alt.Y('sum(Total_Sembuh):Q',  title='Recovered cases'),
-        color='state',
-        tooltip = 'sum(Total_Sembuh)',
-      ).properties(
-        width=1500,
-        height=600
-      ).configure_axis(
-        labelFontSize=17,
-        titleFontSize=20
-      )
-      st.altair_chart(total_cases_graph2)
     
     elif select == "Active Cases":
-      total_cases_graph3  =alt.Chart(subset_data).transform_filter(
-        alt.datum.total_cases > 0  
+      total_cases_graph2  =alt.Chart(subset_data).transform_filter(
+        alt.datum.Total_Aktif > 0  
       ).mark_line().encode(
         x=alt.X('date', type='nominal', title='Date'),
         y=alt.Y('sum(Total_Aktif):Q',  title='Active cases'),
@@ -367,11 +350,11 @@ def main():
         labelFontSize=17,
         titleFontSize=20
       )
-      st.altair_chart(total_cases_graph3)
+      st.altair_chart(total_cases_graph2)
 
     else:
       total_cases_graph3  =alt.Chart(subset_data).transform_filter(
-        alt.datum.total_cases > 0  
+        alt.datum.Total_MeninggalDunia > 0  
       ).mark_line().encode(
         x=alt.X('date', type='nominal', title='Date'),
         y=alt.Y('sum(Total_MeninggalDunia):Q',  title='Death cases'),
