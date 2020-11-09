@@ -21,7 +21,7 @@ import streamlit as st
 import altair as alt
 
 def main(): 
-  st.markdown("<h1 style='text-align: center; color: #ff634d;'><strong><u>Covid-19 Indonesia Dashboard</u></strong></h1>", unsafe_allow_html=True)
+  st.markdown("<h1 style='text-align: center; color: #4d0a00;'><strong><u>Covid-19 Indonesia Dashboard</u></strong></h1>", unsafe_allow_html=True)
   st.sidebar.markdown("<h1 style='text-align: center; color: #aaccee;'><strong><u>Covid-19 Dashboard</u></strong></h1>", unsafe_allow_html=True)
   st.markdown("This Web App is a live Covid-19 Indonesia Dashboard which access Data sourced from BNPB Indonesia with url: https://opendata.arcgis.com/datasets/685be21cd0034247b5ceeac996d947fe_0.geojson", unsafe_allow_html=True)
 
